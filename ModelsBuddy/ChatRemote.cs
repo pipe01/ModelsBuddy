@@ -34,15 +34,5 @@ namespace ModelsBuddy
             }
             return null;
         }
-
-        private static bool StringEquals(string s1, string s2)
-        {
-            if (s1.Length != s2.Length) return false;
-            for (int i = 0; i < s1.Length; i++)
-            {
-
-            }
-            return false;
-        }
     }
 }

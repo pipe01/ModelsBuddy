@@ -48,7 +48,7 @@ namespace ModelsBuddy
 
             Chat.OnMessage += Chat_OnMessage;
 
-            Chat.Print("ModelsBuddy v1.0.5 loaded succesfully!",
+            Chat.Print("ModelsBuddy v1.1.0 loaded succesfully!",
                 System.Drawing.Color.LightGreen);
         }
 
