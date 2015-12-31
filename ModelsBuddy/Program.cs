@@ -54,8 +54,7 @@ namespace ModelsBuddy
 
         private static void Chat_OnMessage(AIHeroClient sender, ChatMessageEventArgs args)
         {
-            if (sender != Player.Instance)
-                sender.SetModel(args.Message.Split(' ')[2]);
+            sender.SetModel(args.Message.Split(' ')[2]);
         }
 
         private static void Chat_OnInput(ChatInputEventArgs args)
