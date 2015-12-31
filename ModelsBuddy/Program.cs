@@ -50,6 +50,16 @@ namespace ModelsBuddy
                 return true;
             });
 
+            CMD.RegisterCommand("resetmodel", a =>
+            {
+                if (a.Length != 0) return false;
+
+                ChatRemote.ResetModelFor(Player.Instance);
+                Chat.Print("Reset current model to default", System.Drawing.Color.LightGreen);
+
+                return true;
+            });
+
             Chat.OnMessage += Chat_OnMessage;
 
             Chat.Print("ModelsBuddy v1.1.0 loaded succesfully! By pipe01",
