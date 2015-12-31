@@ -1,4 +1,5 @@
 ﻿using EloBuddy;
+using EloBuddy.SDK;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +21,17 @@ namespace ModelsBuddy
 
         private static void BroadcastSetModel(AIHeroClient target, string model)
         {
-            Chat.Say("set model {0} to {1}", model, target.Name);
+            Chat.Say("setmodel-{0}-{1}", model, target.Name);
+        }
+
+        public static AIHeroClient GetHeroFromName(string name)
+        {
+            foreach (AIHeroClient item in EntityManager.Heroes.AllHeroes)
+            {
+                if (item.Name == name)
+                    return item;
+            }
+            return null;
         }
     }
 }
