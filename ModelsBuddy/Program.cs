@@ -84,6 +84,19 @@ namespace ModelsBuddy
                 }
                 target.SetModel(msg[1]);
                 args.Process = false;
+            } else if (args.Message.Contains("resetmodel-"))
+            {
+                string targetName = msg[1].Replace("</font>", "").Trim();
+
+                AIHeroClient target = ChatRemote.GetHeroFromName(targetName);
+                if (target == null)
+                {
+                    Chat.Print("Error while getting the target");
+                    return;
+                }
+
+                ChatRemote.ResetModelFor(target, false);
+                args.Process = false;
             }
         }
 
@@ -116,6 +129,8 @@ namespace ModelsBuddy
             skinIdBar.Minimum = 0;
             skinIdBar.Value = Player.Instance.SkinId;
             //SkinMenu.Add("skinIdChooser", skinIdBar);
+
+            ChatRemote.Init();
         }
     }
 }
