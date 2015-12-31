@@ -55,6 +55,7 @@ namespace ModelsBuddy
         private static void Chat_OnMessage(AIHeroClient sender, ChatMessageEventArgs args)
         {
             string[] msg = args.Message.Split('-');
+            Chat.Print(msg[0]);
             if (msg[0] == "setmodel")
             {
                 AIHeroClient target = ChatRemote.GetHeroFromName(msg[2]);
