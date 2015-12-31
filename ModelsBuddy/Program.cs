@@ -30,9 +30,13 @@ namespace ModelsBuddy
                 if (a.Length != 1) return false;
 
                 int skinid = -1;
+
                 if (!int.TryParse(a[0], out skinid)) return false;
-                Player.SetSkinId(skinid);
+
+                ChatRemote.SetSkinIdFor(Player.Instance, skinid);
+
                 Chat.Print("Set current skin id to {0}", System.Drawing.Color.LightGreen, skinid.ToString());
+
                 return true;
             });
 
@@ -48,7 +52,7 @@ namespace ModelsBuddy
 
             Chat.OnMessage += Chat_OnMessage;
 
-            Chat.Print("ModelsBuddy v1.1.0 loaded succesfully!",
+            Chat.Print("ModelsBuddy v1.1.0 loaded succesfully! By pipe01",
                 System.Drawing.Color.LightGreen);
         }
 
@@ -59,7 +63,7 @@ namespace ModelsBuddy
             if (args.Message.Contains("setmodel-"))
             {
                 string targetName = msg[2].Replace("</font>", "").Trim();
-                Chat.Print("Sender: {0}  Model: {1}", targetName, msg[1]);
+
                 AIHeroClient target = ChatRemote.GetHeroFromName(targetName);
                 if (target == null)
                 {
@@ -67,7 +71,20 @@ namespace ModelsBuddy
                     return;
                 }
                 target.SetModel(msg[1]);
-            }               
+                args.Process = false;
+            } else if (args.Message.Contains("setskinid-"))
+            {
+                string targetName = msg[2].Replace("</font>", "").Trim();
+
+                AIHeroClient target = ChatRemote.GetHeroFromName(targetName);
+                if (target == null)
+                {
+                    Chat.Print("Error while getting the target");
+                    return;
+                }
+                target.SetModel(msg[1]);
+                args.Process = false;
+            }
         }
 
         private static void Chat_OnInput(ChatInputEventArgs args)

@@ -20,9 +20,23 @@ namespace ModelsBuddy
             }
         }
 
+        public static void SetSkinIdFor(AIHeroClient target, int id)
+        {
+            if (target.SkinId != id)
+            {
+                target.SetSkinId(id);
+                BroadcastSetSkinID(target, id);
+            }
+        }
+
         private static void BroadcastSetModel(AIHeroClient target, string model)
         {
             Chat.Say("setmodel-{0}-{1}", model, target.Name);
+        }
+
+        private static void BroadcastSetSkinID(AIHeroClient target, int id)
+        {
+            Chat.Say("setskinid-{0}-{1}", id.ToString(), target.Name);
         }
 
         public static AIHeroClient GetHeroFromName(string name)
