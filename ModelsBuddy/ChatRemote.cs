@@ -26,9 +26,11 @@ namespace ModelsBuddy
 
         public static AIHeroClient GetHeroFromName(string name)
         {
-            foreach (AIHeroClient item in EntityManager.Heroes.AllHeroes)
+            Chat.Print(name);
+            foreach (AIHeroClient item in EntityManager.Heroes.Allies)
             {
-                if (item.Name == name)
+                Chat.Print(item.Name + "-" + name);
+                if (item.Name.Equals(name))
                     return item;
             }
             return null;

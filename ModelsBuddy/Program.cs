@@ -48,18 +48,23 @@ namespace ModelsBuddy
 
             Chat.OnMessage += Chat_OnMessage;
 
-            Chat.Print("ModelsBuddy v1.0.2 loaded succesfully!",
+            Chat.Print("ModelsBuddy v1.0.4 loaded succesfully!",
                 System.Drawing.Color.LightGreen);
         }
 
         private static void Chat_OnMessage(AIHeroClient sender, ChatMessageEventArgs args)
         {
             string[] msg = args.Message.Split('-');
-            Chat.Print(msg[0]);
-            if (msg[0] == "setmodel")
+
+            if (args.Message.Contains("setmodel-"))
             {
+                Chat.Print("Sender: {0}  Model: {1}", msg[2], msg[1]);
                 AIHeroClient target = ChatRemote.GetHeroFromName(msg[2]);
-                Chat.Print("Setmodel, Sender: {0}  Model: {1}", target.Name, msg[1]);
+                if (target == null)
+                {
+                    Chat.Print("Error while getting the target");
+                    return;
+                }
                 target.SetModel(msg[1]);
             }               
         }
