@@ -9,6 +9,7 @@ using SharpDX;
 using EloBuddy.SDK.Events;
 using EloBuddy.SDK.Menu;
 using EloBuddy.Networking;
+using System.Text;
 
 namespace ModelsBuddy
 {
@@ -49,16 +50,14 @@ namespace ModelsBuddy
 
             CMD.RegisterCommand("resetmodel", a =>
             {
-                if (a.Length != 0) return false;
-
                 Chat.Print("Reset current model to default", System.Drawing.Color.LightGreen);
 
                 return true;
             });
 
             Chat.OnMessage += Chat_OnMessage;
-
-            Chat.Print("ModelsBuddy v1.1.0 loaded succesfully! By pipe01",
+            
+            Chat.Print("ModelsBuddy v1.1.1 loaded succesfully! By pipe01",
                 System.Drawing.Color.LightGreen);
         }
 
