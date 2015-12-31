@@ -33,8 +33,6 @@ namespace ModelsBuddy
 
                 if (!int.TryParse(a[0], out skinid)) return false;
 
-                ChatRemote.SetSkinIdFor(Player.Instance, skinid);
-
                 Chat.Print("Set current skin id to {0}", System.Drawing.Color.LightGreen, skinid.ToString());
 
                 return true;
@@ -44,7 +42,6 @@ namespace ModelsBuddy
             {
                 if (a.Length != 1) return false;
 
-                ChatRemote.SetModelFor(Player.Instance, a[0]);
                 Chat.Print("Set current model to {0}", System.Drawing.Color.LightGreen, a[0]);
 
                 return true;
@@ -54,7 +51,6 @@ namespace ModelsBuddy
             {
                 if (a.Length != 0) return false;
 
-                ChatRemote.ResetModelFor(Player.Instance);
                 Chat.Print("Reset current model to default", System.Drawing.Color.LightGreen);
 
                 return true;
@@ -68,46 +64,7 @@ namespace ModelsBuddy
 
         private static void Chat_OnMessage(AIHeroClient sender, ChatMessageEventArgs args)
         {
-            string[] msg = args.Message.Split('-');
-
-            if (args.Message.Contains("setmodel-"))
-            {
-                string targetName = msg[2].Replace("</font>", "").Trim();
-
-                AIHeroClient target = ChatRemote.GetHeroFromName(targetName);
-                if (target == null)
-                {
-                    Chat.Print("Error while getting the target");
-                    return;
-                }
-                target.SetModel(msg[1]);
-                args.Process = false;
-            } else if (args.Message.Contains("setskinid-"))
-            {
-                string targetName = msg[2].Replace("</font>", "").Trim();
-
-                AIHeroClient target = ChatRemote.GetHeroFromName(targetName);
-                if (target == null)
-                {
-                    Chat.Print("Error while getting the target");
-                    return;
-                }
-                target.SetModel(msg[1]);
-                args.Process = false;
-            } else if (args.Message.Contains("resetmodel-"))
-            {
-                string targetName = msg[1].Replace("</font>", "").Trim();
-
-                AIHeroClient target = ChatRemote.GetHeroFromName(targetName);
-                if (target == null)
-                {
-                    Chat.Print("Error while getting the target");
-                    return;
-                }
-
-                ChatRemote.ResetModelFor(target, false);
-                args.Process = false;
-            }
+            
         }
 
         private static void Chat_OnInput(ChatInputEventArgs args)
@@ -139,8 +96,6 @@ namespace ModelsBuddy
             skinIdBar.Minimum = 0;
             skinIdBar.Value = Player.Instance.SkinId;
             //SkinMenu.Add("skinIdChooser", skinIdBar);
-
-            ChatRemote.Init();
         }
     }
 }
