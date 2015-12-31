@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ModelsBuddy
@@ -26,14 +27,22 @@ namespace ModelsBuddy
 
         public static AIHeroClient GetHeroFromName(string name)
         {
-            Chat.Print(name);
             foreach (AIHeroClient item in EntityManager.Heroes.Allies)
             {
-                Chat.Print(item.Name + "-" + name);
-                if (item.Name.Equals(name))
+                if (item.Name == name)
                     return item;
             }
             return null;
+        }
+
+        private static bool StringEquals(string s1, string s2)
+        {
+            if (s1.Length != s2.Length) return false;
+            for (int i = 0; i < s1.Length; i++)
+            {
+
+            }
+            return false;
         }
     }
 }
